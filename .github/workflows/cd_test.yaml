@@ -9,7 +9,7 @@ on:
         description: 'Set it to true to bump a major version'
         required: false
         default: false
-        type: boolean
+        type: choice
         options: [true, false]
 
 jobs:
@@ -21,6 +21,9 @@ jobs:
   minor-update:
     # check if on push
     if: ${{ inputs.major_update == '' }} || ${{ inputs.major_update == 'false' }}
+    run:
+      # echo input major update
+      echo "major_update: ${{ inputs.major_update }}"
     uses: ./.github/workflows/cd.yaml
     with:
       major_update: false
