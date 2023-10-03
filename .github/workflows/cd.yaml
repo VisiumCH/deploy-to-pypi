@@ -3,12 +3,6 @@ name: Deploy to PyPI Callable
 
 on:
   workflow_call:
-    inputs:
-      major_update:
-        description: 'Set it to true to bump a major version'
-        required: false
-        type : boolean
-        default: false
 
 jobs:
   publish-to-pypi:
@@ -34,31 +28,22 @@ jobs:
       - name: Increment the git tag
         run: |
           # get the current git tag
-          CURRENT_TAG=$(git tag --list | tail -1)
-          if [ -z "$CURRENT_TAG" ]; then
-            # If the tag is empty, create a new tag with the version 0.0.0
-            NEW_TAG=0.0.0
-          else
-            if [ "${{inputs.major_update}}" == "true" ]; then
-              # Increment the tag by a major version with the semver python package
-              NEW_TAG=$(python -c "import semver; print(semver.bump_major('$CURRENT_TAG'))")
-            else
-              # Increment the tag by a minor version with the semver python package
-              NEW_TAG=$(python -c "import semver; print(semver.bump_minor('$CURRENT_TAG'))")
-            fi
-          fi
+          git fetch --tags origin
+          CURRENT_TAG=$(git describe --tags --abbrev=0)
+          # Increment the tag by a minor version with the semver python package
+          NEW_TAG=$(python -c "import semver; print(semver.bump_minor('$CURRENT_TAG'))")
           git tag $NEW_TAG
           # push the tag to the remote repository
           git push origin $NEW_TAG
 
       - name: Retrieve the package version using setuptools_scm and publish to PyPI
         run: |
-          # Use latest git tag to get the current version and echo it
-          PACKAGE_VERSION=$(git tag --list | tail -1)
+          # Use setuptools_scm to get the current version and echo it
+          PACKAGE_VERSION=$(python -c "import setuptools_scm; print(setuptools_scm.get_version())")
           echo "Package version: $PACKAGE_VERSION"
 
-          # # Build the package using setuptools_scm for versioning
-          # python -m build
+          # Build the package using setuptools_scm for versioning
+          python -m build
 
           # Publish the package to PyPI using twine
           python -m twine upload dist/*
