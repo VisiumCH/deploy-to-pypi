@@ -31,6 +31,17 @@ jobs:
           python -m pip install --upgrade build
           python -m pip install --upgrade semver
 
+      - name: Check if git tag exists on first push
+        run: |
+          # get the current git tag
+          CURRENT_TAG=$(git describe --tags --abbrev=0)
+          if [ -z "$CURRENT_TAG" ]; then
+            # If the tag is empty, create a new tag with the version 0.0.0
+            git tag 0.0.0
+            # push the tag to the remote repository
+            git push origin 0.0.0
+          fi
+
       - name: Increment the git tag
         run: |
           # get the current git tag
