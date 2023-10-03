@@ -15,4 +15,4 @@ jobs:
   call-workflow-deploy-to-pypi:
     uses: ./.github/workflows/cd.yaml
     with:
-      major_update: ${{ github.event.inputs.major_update }}
+      major_update: ${{ inputs.major_update }}
