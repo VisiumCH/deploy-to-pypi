@@ -38,9 +38,10 @@ jobs:
           # If no git tag exists, create one with version 0.0.0
           if [ -z "$CURRENT_TAG" ]; then
             # If the tag is empty, create a new tag with the version 0.0.0
-            git tag 0.0.0
+            NEW_TAG = 0.0.0
+            git tag -a $NEW_TAG
             # push the tag to the remote repository
-            git push origin 0.0.0
+            git push origin $NEW_TAG
           fi
 
       - name: Increment the git tag
