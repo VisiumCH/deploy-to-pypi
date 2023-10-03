@@ -8,7 +8,7 @@ on:
         description: 'Set it to true to bump a major version'
         required: false
         type : boolean
-        default: 'false'
+        default: false
 
 jobs:
   publish-to-pypi:
