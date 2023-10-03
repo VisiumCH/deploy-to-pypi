@@ -1,8 +1,10 @@
 
-name: Deploy to PyPI
+name: CD Pipeline
 
 on:
-  workflow_call:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
     inputs:
       major_update:
         description: 'Set it to true to bump a major version'
@@ -49,17 +51,17 @@ jobs:
           # push the tag to the remote repository
           git push origin $NEW_TAG
 
-      # - name: Retrieve the package version using setuptools_scm and publish to PyPI
-      #   run: |
-      #     # Use setuptools_scm to get the current version and echo it
-      #     PACKAGE_VERSION=$(python -c "import setuptools_scm; print(setuptools_scm.get_version())")
-      #     echo "Package version: $PACKAGE_VERSION"
+      - name: Retrieve the package version using setuptools_scm and publish to PyPI
+        run: |
+          # Use setuptools_scm to get the current version and echo it
+          PACKAGE_VERSION=$(python -c "import setuptools_scm; print(setuptools_scm.get_version())")
+          echo "Package version: $PACKAGE_VERSION"
 
-      #     # Build the package using setuptools_scm for versioning
-      #     python -m build
+          # Build the package using setuptools_scm for versioning
+          python -m build
 
-      #     # Publish the package to PyPI using twine
-      #     python -m twine upload dist/*
-      #   env:
-      #     TWINE_USERNAME: __token__
-      #     TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+          # Publish the package to PyPI using twine
+          python -m twine upload dist/*
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
