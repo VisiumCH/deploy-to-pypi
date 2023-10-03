@@ -1,8 +1,8 @@
-name: Call a reusable workflow
+name: Deploy to PyPI
 
 on:
   push:
-    branches: [ main ]
+    branches: [master]
   workflow_dispatch:
     inputs:
       major_update:
@@ -10,12 +10,16 @@ on:
         required: false
         default: false
         type: choice
-        options:
-          - true
-          - false
+        options: [true, false]
 
 jobs:
-  call-workflow-deploy-to-pypi:
+  major-update:
+    if: ${{ github.event.inputs.major_update == 'true' }}
     uses: ./.github/workflows/cd.yaml
     with:
-      major_update: ${{ github.event.inputs.major_update }}
+      major_update: true
+  minor-update:
+    if: ${{ github.event.inputs.major_update != 'true' }}
+    uses: ./.github/workflows/cd.yaml
+    with:
+      major_update: false
