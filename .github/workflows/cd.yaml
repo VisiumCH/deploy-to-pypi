@@ -39,7 +39,7 @@ jobs:
           # If no git tag exists, create one with version 0.0.0
           if [ -z "$CURRENT_TAG" ]; then
             # If the tag is empty, create a new tag with the version 0.0.0
-            NEW_TAG = 0.0.0
+            NEW_TAG=0.0.0
             # annotated tags have creation date
             git tag $NEW_TAG
             # push the tag to the remote repository
