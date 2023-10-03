@@ -8,8 +8,9 @@ on:
       major_update:
         description: 'Set it to true to bump a major version'
         required: false
-        type: choice
         default: false
+        type: choice
+        options: [true, false]
 
 jobs:
   major-update:
