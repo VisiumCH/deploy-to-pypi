@@ -31,10 +31,11 @@ jobs:
           python -m pip install --upgrade build
           python -m pip install --upgrade semver
 
-      - name: Check if git tag exists on first push
+      - name: Check if git tag exists
         run: |
           # get the current git tag
           CURRENT_TAG=$(git describe --tags --abbrev=0)
+          # If no git tag exists, create one with version 0.0.0
           if [ -z "$CURRENT_TAG" ]; then
             # If the tag is empty, create a new tag with the version 0.0.0
             git tag 0.0.0
