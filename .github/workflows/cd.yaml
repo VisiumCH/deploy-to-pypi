@@ -23,13 +23,13 @@ jobs:
         with:
           python-version: 3.9
 
-      # - run: |
-      #     python -m pip install --upgrade pip
-      #     python -m pip install --upgrade setuptools wheel
-      #     python -m pip install --upgrade twine
-      #     python -m pip install --upgrade setuptools_scm
-      #     python -m pip install --upgrade build
-      #     python -m pip install --upgrade semver
+      - run: |
+          # python -m pip install --upgrade pip
+          # python -m pip install --upgrade setuptools wheel
+          # python -m pip install --upgrade twine
+          # python -m pip install --upgrade setuptools_scm
+          # python -m pip install --upgrade build
+          python -m pip install --upgrade semver
 
       # - name: Check if git tag exists
       #   run: |
