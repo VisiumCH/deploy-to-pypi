@@ -53,16 +53,15 @@ jobs:
 
       - name: Retrieve the package version using setuptools_scm and publish to PyPI
         run: |
-          # Use setuptools_scm to get the current version and echo it
-          PACKAGE_VERSION=$(python -c "import setuptools_scm; print(setuptools_scm.get_version())")
+          # Use latest git tag to get the current version and echo it
+          PACKAGE_VERSION=$(git tag --list | tail -1)
           echo "Package version: $PACKAGE_VERSION"
-          echo "NEW_TAG: $NEW_TAG"
 
-      #     # Build the package using setuptools_scm for versioning
-      #     python -m build
+          # Build the package using setuptools_scm for versioning
+          python -m build
 
-      #     # Publish the package to PyPI using twine
-      #     python -m twine upload dist/*
-      #   env:
-      #     TWINE_USERNAME: __token__
-      #     TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        #   # Publish the package to PyPI using twine
+        #   python -m twine upload dist/*
+        # env:
+        #   TWINE_USERNAME: __token__
+        #   TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
