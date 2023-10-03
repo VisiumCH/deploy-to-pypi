@@ -50,12 +50,17 @@ jobs:
         run: |
           # get the current git tag
           CURRENT_TAG=$(git tag --list | tail -1)
-          if [ "${{inputs.major_update}}" == "true" ]; then
-            # Increment the tag by a major version with the semver python package
-            NEW_TAG=$(python -c "import semver; print(semver.bump_major('$CURRENT_TAG'))")
+          if [ -z "$CURRENT_TAG" ]; then
+            # If the tag is empty, create a new tag with the version 0.0.0
+            NEW_TAG=0.0.0
           else
-            # Increment the tag by a minor version with the semver python package
-            NEW_TAG=$(python -c "import semver; print(semver.bump_minor('$CURRENT_TAG'))")
+            if [ "${{inputs.major_update}}" == "true" ]; then
+              # Increment the tag by a major version with the semver python package
+              NEW_TAG=$(python -c "import semver; print(semver.bump_major('$CURRENT_TAG'))")
+            else
+              # Increment the tag by a minor version with the semver python package
+              NEW_TAG=$(python -c "import semver; print(semver.bump_minor('$CURRENT_TAG'))")
+            fi
           fi
           git tag $NEW_TAG
           # push the tag to the remote repository
