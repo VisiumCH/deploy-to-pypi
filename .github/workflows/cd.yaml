@@ -41,11 +41,11 @@ jobs:
           PACKAGE_VERSION=$(python -c "import setuptools_scm; print(setuptools_scm.get_version())")
           echo "Package version: $PACKAGE_VERSION"
 
-          # Build the package using setuptools_scm for versioning
-          python -m build
+          # # Build the package using setuptools_scm for versioning
+          # python -m build
 
-          # Publish the package to PyPI using twine
-          python -m twine upload dist/*
+          # # Publish the package to PyPI using twine
+          # python -m twine upload dist/*
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
