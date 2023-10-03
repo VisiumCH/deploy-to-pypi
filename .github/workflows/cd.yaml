@@ -7,6 +7,7 @@ on:
       major_update:
         description: 'Set it to true to bump a major version'
         required: false
+        type : boolean
         default: 'false'
 
 jobs:
