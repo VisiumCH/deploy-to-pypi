@@ -12,6 +12,7 @@ on:
         options:
           - true
           - false
+  workflow_dispatch:
 
 jobs:
   publish-to-pypi:
