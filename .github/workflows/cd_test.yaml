@@ -4,9 +4,15 @@ on:
   push:
     branches: [ master ]
   workflow_dispatch:
+      inputs:
+      major_update:
+        description: 'Set it to true to bump a major version'
+        required: false
+        type : boolean
+        default: false
 
 jobs:
   call-workflow-deploy-to-pypi:
     uses: ./.github/workflows/cd.yaml
-    # with:
-    #   major_update: ${{ github.event.inputs.major_update }}
+    with:
+      major_update: ${{ github.event.inputs.major_update }}
