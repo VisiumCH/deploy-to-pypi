@@ -2,7 +2,7 @@ name: Call a reusable workflow
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
     inputs:
       major_update:
