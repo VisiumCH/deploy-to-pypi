@@ -34,7 +34,7 @@ jobs:
       - name: Check if git tag exists
         run: |
           # get the current git tag
-          CURRENT_TAG=$(git tag --abbrev=0 2>/dev/null)
+          CURRENT_TAG=$(git describe --tags --abbrev=0 2>/dev/null)
           # If no git tag exists, create one with version 0.0.0
           if [ -z "$CURRENT_TAG" ]; then
             # If the tag is empty, create a new tag with the version 0.0.0
