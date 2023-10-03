@@ -57,7 +57,7 @@ jobs:
             # Increment the tag by a minor version with the semver python package
             NEW_TAG=$(python -c "import semver; print(semver.bump_minor('$CURRENT_TAG'))")
           fi
-          git tag -a $NEW_TAG
+          git tag -a $NEW_TAG -m "Version $NEW_TAG"
           # push the tag to the remote repository
           git push origin $NEW_TAG
 
