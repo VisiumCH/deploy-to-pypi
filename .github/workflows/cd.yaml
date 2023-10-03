@@ -57,11 +57,11 @@ jobs:
           PACKAGE_VERSION=$(git tag --list | tail -1)
           echo "Package version: $PACKAGE_VERSION"
 
-          # Build the package using setuptools_scm for versioning
-          python -m build
+          # # Build the package using setuptools_scm for versioning
+          # python -m build
 
-        #   # Publish the package to PyPI using twine
-        #   python -m twine upload dist/*
-        # env:
-        #   TWINE_USERNAME: __token__
-        #   TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+          # Publish the package to PyPI using twine
+          python -m twine upload dist/*
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
