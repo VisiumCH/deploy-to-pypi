@@ -56,6 +56,7 @@ jobs:
           # Use setuptools_scm to get the current version and echo it
           PACKAGE_VERSION=$(python -c "import setuptools_scm; print(setuptools_scm.get_version())")
           echo "Package version: $PACKAGE_VERSION"
+          echo "NEW_TAG: $NEW_TAG"
 
       #     # Build the package using setuptools_scm for versioning
       #     python -m build
