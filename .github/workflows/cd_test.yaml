@@ -14,13 +14,13 @@ on:
 
 jobs:
   major-update:
-    if: "${{ github.event.inputs.major_update == true }}"
+    if: "${{ inputs.major_update == 'true' }}"
     uses: ./.github/workflows/cd.yaml
     with:
       major_update: true
   minor-update:
     # check if on push
-    if: "${{ github.event.inputs.level == '' }} || ${{ github.event.inputs.level == false }}"
+    if: "${{ inputs.major_update == '' }} || ${{ inputs.major_update == 'false' }}"
     uses: ./.github/workflows/cd.yaml
     with:
       major_update: false
