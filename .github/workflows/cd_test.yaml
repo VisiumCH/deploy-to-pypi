@@ -9,12 +9,12 @@ on:
         description: 'Set it to true to bump a major version'
         required: false
         default: false
-        type: choice
+        type: boolean
         options: [true, false]
 
 jobs:
   major-update:
-    if: "${{ github.event.inputs.major_update == true}}"
+    if: "${{ github.event.inputs.major_update == true }}"
     uses: ./.github/workflows/cd.yaml
     with:
       major_update: true
