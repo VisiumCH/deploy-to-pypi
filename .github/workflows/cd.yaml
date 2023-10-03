@@ -49,7 +49,7 @@ jobs:
       - name: Increment the git tag
         run: |
           # get the current git tag
-          CURRENT_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+          CURRENT_TAG=$(git tag --list | tail -1)
           if [ "${{inputs.major_update}}" == "true" ]; then
             # Increment the tag by a major version with the semver python package
             NEW_TAG=$(python -c "import semver; print(semver.bump_major('$CURRENT_TAG'))")
