@@ -1,0 +1,21 @@
+name: Call a reusable workflow
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      major_update:
+        description: 'Set it to true to bump a major version'
+        required: false
+        default: false
+        type: choice
+        options:
+          - true
+          - false
+
+jobs:
+  call-workflow-deploy-to-pypi:
+    uses: ./github/workflows/cd.yaml@main
+    with:
+      major_update: ${{ github.event.inputs.major_update }}
