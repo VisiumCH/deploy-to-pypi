@@ -1,3 +1,5 @@
+# CD for local testing
+
 name: Deploy to PyPI
 
 on:
@@ -6,5 +8,5 @@ on:
   workflow_dispatch:
 
 jobs:
-  major-update:
+  minor-bump-project-deployment:
     uses: ./.github/workflows/cd.yaml
