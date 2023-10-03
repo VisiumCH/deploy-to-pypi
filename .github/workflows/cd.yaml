@@ -14,37 +14,37 @@ jobs:
   publish-to-pypi:
     runs-on: ubuntu-latest
     steps:
-      - name: Clone the repository with full history depth to retrieve all tags
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      # - name: Clone the repository with full history depth to retrieve all tags
+      #   uses: actions/checkout@v3
+      #   with:
+      #     fetch-depth: 0
 
-      - uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: 3.9
 
-      - run: |
-          python -m pip install --upgrade pip
-          python -m pip install --upgrade setuptools wheel
-          python -m pip install --upgrade twine
-          python -m pip install --upgrade setuptools_scm
-          python -m pip install --upgrade build
-          python -m pip install --upgrade semver
+      # - run: |
+      #     python -m pip install --upgrade pip
+      #     python -m pip install --upgrade setuptools wheel
+      #     python -m pip install --upgrade twine
+      #     python -m pip install --upgrade setuptools_scm
+      #     python -m pip install --upgrade build
+      #     python -m pip install --upgrade semver
 
-      - name: Check if git tag exists
-        run: |
-          # get the current git tag
-          CURRENT_TAG=$(git describe --tags --abbrev=0 2>/dev/null)
-          echo "Current tag: $CURRENT_TAG"
-          # If no git tag exists, create one with version 0.0.0
-          if [ -z "$CURRENT_TAG" ]; then
-            # If the tag is empty, create a new tag with the version 0.0.0
-            NEW_TAG = 0.0.0
-            # annotated tags have creation date
-            git tag -a $NEW_TAG
-            # push the tag to the remote repository
-            git push origin $NEW_TAG
-          fi
+      # - name: Check if git tag exists
+      #   run: |
+      #     # get the current git tag
+      #     CURRENT_TAG=$(git describe --tags --abbrev=0)
+      #     echo "Current tag: $CURRENT_TAG"
+      #     # If no git tag exists, create one with version 0.0.0
+      #     if [ -z "$CURRENT_TAG" ]; then
+      #       # If the tag is empty, create a new tag with the version 0.0.0
+      #       NEW_TAG = 0.0.0
+      #       # annotated tags have creation date
+      #       git tag -a $NEW_TAG
+      #       # push the tag to the remote repository
+      #       git push origin $NEW_TAG
+      #     fi
 
       - name: Increment the git tag
         run: |
