@@ -6,7 +6,26 @@ The purpose of this github action is to implement a CD that automatically deploy
 
 ## How to use it
 
-You can add the following snippet of code in a file located in `.github/workflows`.
+First, you need to add a tag with the version of your package to your repository. The version should be in X.X.X format (e.g., 0.0.0 for the very first version).
+
+Add the following to your `pyproject.toml`:
+
+```toml
+[project]
+name = "ADD_PROJECT_NAME"
+dynamic = ["version"]
+
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+```
+Other fields such as a description of the project can be added to the project section of this file. More details [here](https://python-poetry.org/docs/pyproject/).
+
+*No setup.py file is required anymore and it should be deleted*
+
+Add the following snippet of code in a file located in `.github/workflows`.
 
 ```yaml
 
@@ -19,5 +38,7 @@ on:
 jobs:
   minor-bump-project-deployment:
     uses: VisiumCH/deploy-to-pypi/.github/workflows/cd.yaml@main
+    secrets: inherit
 
 ```
+Finally, you need to make sure that your repository is granted access to a PyPI API key.
