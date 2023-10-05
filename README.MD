@@ -14,10 +14,10 @@ name: Deploy Minor Bump to PyPI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   minor-bump-project-deployment:
-    uses: VisiumCH/deploy-to-pypi/.github/workflows/cd.yaml@master
+    uses: VisiumCH/deploy-to-pypi/.github/workflows/cd.yaml@main
 
 ```
