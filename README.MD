@@ -23,7 +23,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
 ```
-Other fields such as a description of the project can be added to the project section of this file. More details [here](https://python-poetry.org/docs/pyproject/).
+Other fields such as a description of the project can be added to the project section of this file. More details [here](https://packaging.python.org/en/latest/specifications/declaring-project-metadata/).
 
 *No setup.py file is required anymore and it should be deleted*
 
