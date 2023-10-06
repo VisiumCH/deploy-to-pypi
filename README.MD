@@ -6,7 +6,9 @@ The purpose of this github action is to implement a CD that automatically deploy
 
 ## How to use it
 
-First, you need to add a tag with the version of your package to your repository. The version should be in X.X.X format (e.g., 0.0.0 for the very first version).
+First, you should have a PyPI API key in your repository secrets. It should be named `PYPI_API_TOKEN`.
+
+You need to add a tag with the version of your package to your repository. The version should be in X.X.X format (e.g., 0.0.0 for the very first version).
 
 Add the following to your `pyproject.toml`:
 
